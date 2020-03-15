@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/style.css" rel="stylesheet">
+    <title>newTZ.html</title>
+</head>
+<body id="main">
+
+    <div>
+        <input type="text" name="number" maxlength="8" id="number" placeholder="enter 8 numbers">
+        <button id="submit">SUBMIT</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+
+        submit = document.querySelector("#submit");
+        submit.addEventListener("click", checkTZ);
+        
+        function checkTZ() {
+            var tz = document.querySelector("#number").value;
+            var number = tz;
+            var arrayTz = [];
+            var total = 0;
+            var checkNum = 0;
+        
+            for (let i = 0; i < 8; i++) {
+                var a = number % 10;
+                number = Math.trunc(number / 10);
+                arrayTz.push(a);
+            }
+        
+            arrayTz.forEach(function(num, i) {
+        
+                if (i % 2 == 0) {
+                    num = num * 2;
+        
+                    if (num >= 10) {
+                        var numUnit = num % 10;
+                        var numDex = Math.trunc(num / 10);
+                        num = numUnit + numDex;
+                    }
+                    total += num;
+                } else {
+                    total += num;
+                }
+            });
+        
+            var numUnitTotal = total % 10;
+        
+            if (numUnitTotal != 0) {
+                checkNum = 10 - numUnitTotal;
+            }
+        
+            var tz9 = tz += checkNum;
+        
+            var main = document.querySelector("#result");
+            main.innerHTML = "The valid TZ : " + tz9;
+        }
+        
+        </script>
+
+</body>
+</html>
